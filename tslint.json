@@ -1,0 +1,13 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "quotemark": [true, "single"],
+    "semicolon": [false],
+    "trailing-comma": [false],
+    "object-literal-sort-keys": false,
+    "ordered-imports": [false]
+  },
+  "rulesDirectory": [
+    "node_modules/tslint-microsoft-contrib"
+  ]
+}

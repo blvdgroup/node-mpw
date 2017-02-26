@@ -1,0 +1,35 @@
+{
+  "name": "node-mpw",
+  "version": "0.0.1",
+  "description": "Implementation of Master Password for nodejs and browser",
+  "main": "./dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tslint": "tslint --config tslint.json src/**/*.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blvdgroup/node-mpw.git"
+  },
+  "keywords": [
+    "masterpasswordapp",
+    "master-password",
+    "password"
+  ],
+  "author": "Resi Respati <resir014@blvd.space>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blvdgroup/node-mpw/issues"
+  },
+  "homepage": "https://github.com/blvdgroup/node-mpw#readme",
+  "devDependencies": {
+    "@types/node": "^7.0.5",
+    "mocha": "^3.2.0",
+    "tslint": "^4.4.2",
+    "tslint-microsoft-contrib": "^4.0.0",
+    "typescript": "^2.2.1"
+  },
+  "dependencies": {
+    "scrypt": "^6.0.3"
+  }
+}
