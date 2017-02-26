@@ -6,24 +6,35 @@ import * as constants from './utils/constants'
 // import * as templateChars from './utils/templateChars'
 import { toArrayBuffer } from './utils/helpers'
 
-export const generateKey = (name: string, password: string, version?: string): Buffer => {
-  // TODO: We should probably use buffers, since the algorithm specs wants
-  // an unsigned 32-bit integer for numbers.
-  // Probably improve the helper functions for this use-case.
-  let salt = Buffer.from(constants.NAMESPACE + name.length + name, 'utf8')
+export const generateKey = (name: string, password: string, namespace?: string, version?: string): Buffer => {
+  if (!namespace) {
+    namespace = constants.NAMESPACE
+  }
 
-  let key = scrypt.hashSync(password, { N: 32768, r: 8, p: 2 }, 64, salt)
-  return key
+  const buf = Buffer.allocUnsafe(namespace.length + 4 + name.length)
+  buf.fill(0)
+
+  buf.write(namespace)
+  buf.writeUInt32BE(name.length, namespace.length)
+  buf.write(name, namespace.length + 4)
+
+  return scrypt.hashSync(password, { N: 32768, r: 8, p: 2 }, 64, buf)
 }
 
-export const generateSeed = (site: string, key: Buffer, counter: number = 1) => {
-  // TODO: We should probably use buffers, since the algorithm specs wants
-  // an unsigned 32-bit integer for numbers.
-  // Probably improve the helper functions for this use-case.
-  let data = Buffer.from(constants.NAMESPACE + site.length + site + counter)
+export const generateSeed = (site: string, key: Buffer, counter: number = 1, namespace?: string) => {
+  if (!namespace) {
+    namespace = constants.NAMESPACE
+  }
 
-  let seed = crypto.createHmac('sha256', key).update(data).digest()
-  return Buffer.from(seed)
+  const buf = Buffer.allocUnsafe(namespace.length + 4 + site.length + 4)
+  buf.fill(0)
+
+  buf.write(namespace)
+  buf.writeUInt32BE(site.length, namespace.length)
+  buf.write(site, namespace.length + 4)
+  buf.writeUInt32BE(1, namespace.length + 4 + site.length)
+
+  return crypto.createHmac('sha256', key).update(buf).digest()
 }
 
 export const generatePassword = (site: string, key: Buffer, seed: Buffer, counter: number = 1,
