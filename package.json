@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Implementation of Master Password for nodejs and browser",
   "main": "./dist/index.js",
+  "typings": "./index.d.js",
   "scripts": {
     "test": "tsc && mocha",
     "tslint": "tslint --config tslint.json src/**/*.ts"
