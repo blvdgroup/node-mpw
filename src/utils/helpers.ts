@@ -1,23 +1,20 @@
-// TODO: These conversion functions still need to be refined.
+import crypto = require('crypto')
+import * as constants from './constants'
 
-export function toArrayBuffer(buf: Buffer): ArrayBuffer {
-  let ab = new ArrayBuffer(buf.length)
-  let view = new Uint8Array(ab)
-
-  for (let i = 0; i < buf.length; ++i) {
-    view[i] = buf[i];
+export const generateSeed = (site: string, key: Buffer, counter: number = 1, namespace?: string): Buffer => {
+  if (!namespace) {
+    namespace = constants.NAMESPACE
   }
 
-  return ab
-}
+  // Buffer that serves as a data to generate the seed via HMAC-SHA256:
+  // `namespace + site.length + site + counter`
+  const buf = Buffer.allocUnsafe(namespace.length + 4 + site.length + 4)
+  buf.fill(0)
 
-export function toBuffer(ab): Buffer {
-  let buf = new Buffer(ab.byteLength);
-  let view = new Uint8Array(ab);
+  buf.write(namespace)
+  buf.writeUInt32BE(site.length, namespace.length)
+  buf.write(site, namespace.length + 4)
+  buf.writeUInt32BE(counter, namespace.length + 4 + site.length)
 
-  for (let i = 0; i < buf.length; ++i) {
-    buf[i] = view[i];
-  }
-
-  return buf;
+  return crypto.createHmac('sha256', key).update(buf).digest()
 }

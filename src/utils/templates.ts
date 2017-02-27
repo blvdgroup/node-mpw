@@ -1,4 +1,4 @@
-export default {
+export const templates = {
   maximum: [
     'anoxxxxxxxxxxxxxxxxx',
     'axxxxxxxxxxxxxxxxxno'
