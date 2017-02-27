@@ -4,7 +4,7 @@
   "description": "Implementation of Master Password for nodejs and browser",
   "main": "./dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tsc && mocha",
     "tslint": "tslint --config tslint.json src/**/*.ts"
   },
   "repository": {
@@ -24,6 +24,7 @@
   "homepage": "https://github.com/blvdgroup/node-mpw#readme",
   "devDependencies": {
     "@types/node": "^7.0.5",
+    "chai": "^3.5.0",
     "mocha": "^3.2.0",
     "tslint": "^4.4.2",
     "tslint-microsoft-contrib": "^4.0.0",
