@@ -2,8 +2,7 @@ import scrypt = require('scrypt')
 
 import * as constants from './utils/constants'
 import { generateSeed } from './utils/helpers'
-import { templateChars } from './utils/templateChars'
-import { templates } from './utils/templates'
+import { templates, templateChars } from './utils/templates'
 
 export const generateKey = (name: string, password: string, namespace?: string, version?: string): Buffer => {
   if (!namespace) {
