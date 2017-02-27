@@ -6,11 +6,7 @@
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "search.exclude": {
-    "_drafts/**": true,
-    "_etc/**": true,
-    "_posts/**": true,
-    "_projects/**": true,
-    "_site/**": true,
-    ".sass-cache/**": true
+    "dist/**": true,
+    "node_modules/**": true
   }
 }
