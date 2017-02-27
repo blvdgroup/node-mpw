@@ -21,10 +21,12 @@ Issues and Pull Requests are welcome! Please read our contributing guidelines & 
 
 ### Reading the commit log
 
-We use a few emojis as an identifier on what the commits are. Feel free to use this standard as well.
+We use a few emojis as an identifier on what the commits are. The following commit naming scheme is loosely based on the [Commitizen](https://commitizen.github.io/cz-cli/) commit naming conventions. Feel free to use this standard as well.
 
-- :dash: (dash): Code style cleanup / linting / dusting / etc.
+- :bulb: (bulb): Working on new features
 - :bug: (bug): Bug squashing
-- :construction: (construction): Large refactors or rewrites
 - :memo: (memo): Working on documentation
+- :dash: (dash): Code style cleanup / linting / dusting / etc.
+- :construction: (construction): Large refactors or rewrites
+- :wrench: (wrench): Adding missing tests
 - :arrow_up: (arrow_up): Version bumps
