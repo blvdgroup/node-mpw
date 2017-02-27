@@ -4,3 +4,4 @@ node_modules/
 *.tgz
 
 !dist/
+!index.d.ts
