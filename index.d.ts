@@ -9,11 +9,11 @@ declare namespace mpw {
    * @export
    * @param {string} name The username.
    * @param {string} password The password.
-   * @param {string} [namespace] The namespace used as a salt to calculate the key.
    * @param {string} [version] The algorithm version being used for this process.
+   * @param {string} [namespace] The namespace used as a salt to calculate the key.
    * @returns {Buffer} An key generated from the `scrypt` algorithm.
    */
-  export function generateKey(name: string, password: string, namespace?: string, version?: string): Buffer
+  export function generateKey(name: string, password: string, version?: string, namespace?: string): Buffer
   /**
    * Encode a site password using the site's type template.
    *
@@ -22,8 +22,16 @@ declare namespace mpw {
    * @param {Buffer} key An `scrypt`-hashed key generated from the `generateKey()` function.
    * @param {number} [counter] An integer that can be incremented when the user needs a new password for the site.
    * @param {string} [template] The password template that the user chooses.
+   * @param {number} [version] The algorithm version being used for this process.
    * @param {string} [namespace] The namespace used as a salt to calculate the seed.
    * @returns {string} the final, generated password.
    */
-  export function generatePassword(site: string, key: Buffer, counter?: number, template?: string, namespace?: string): string
+  export function generatePassword(
+    site: string,
+    key: Buffer,
+    counter?: number,
+    template?: string,
+    version?: number,
+    namespace?: string
+  ): string
 }
