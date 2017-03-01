@@ -4,6 +4,16 @@ import * as constants from './utils/constants'
 import { generateSeed, toNetworkByte, computeTemplate } from './utils/helpers'
 import { templates, templateChars } from './utils/templates'
 
+/**
+ * Calculate the master key from a user's name and master password.
+ *
+ * @export
+ * @param {string} name The desired username.
+ * @param {string} password The desired password.
+ * @param {string} [version] The algorithm version being used for this process.
+ * @param {string} [namespace] The namespace used as a salt to calculate the key.
+ * @returns {Buffer} An key generated from the `scrypt` algorithm.
+ */
 export const generateKey = (
   name: string,
   password: string,
@@ -31,6 +41,18 @@ export const generateKey = (
   return scrypt.hashSync(password, constants.SCRYPT_PARAMS, 64, buf)
 }
 
+/**
+ * Encode a site password using the site's type template.
+ *
+ * @export
+ * @param {string} site The site name. The bare domain name is an ideal choice.
+ * @param {Buffer} key An `scrypt`-hashed key generated from the `generateKey()` function.
+ * @param {number} [counter] An integer that can be incremented when the user needs a new password for the site.
+ * @param {string} [template] The password template that the user chooses.
+ * @param {number} [version] The algorithm version being used for this process.
+ * @param {string} [namespace] The namespace used as a salt to calculate the seed.
+ * @returns {string} the final, generated password.
+ */
 export const generatePassword = (
   site: string,
   key: Buffer,
