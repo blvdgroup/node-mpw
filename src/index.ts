@@ -1,16 +1,13 @@
 import scrypt = require('scrypt')
 
 import * as constants from './utils/constants'
-import { generateSeed, toNetworkByte } from './utils/helpers'
+import { generateSeed, toNetworkByte, computeTemplate } from './utils/helpers'
 import { templates, templateChars } from './utils/templates'
 
 export const generateKey = (name: string, password: string, version: number = constants.MP_ALGORITHM_VERSION,
   namespace?: string): Buffer => {
-  if (!namespace) {
+  if (typeof namespace === 'undefined') {
     namespace = constants.NAMESPACE
-  }
-  if (!version) {
-    version = constants.MP_ALGORITHM_VERSION
   }
 
   // Cache name length for older versions of MPW.
@@ -36,38 +33,18 @@ export const generateKey = (name: string, password: string, version: number = co
 
 export const generatePassword = (site: string, key: Buffer, counter: number = 1, template: string = 'long',
   version: number = constants.MP_ALGORITHM_VERSION, namespace?: string): string => {
-  if (!namespace) {
+  if (typeof namespace === 'undefined') {
     namespace = constants.NAMESPACE
   }
 
+  let seed: Buffer | Uint16Array
+
+  // V0 backwards compatibility: convert  generated seed to network byte order.
   if (version < 1) {
-    let seed: Uint16Array = toNetworkByte(generateSeed(site, key, counter, version, namespace))
-
-    // Find the selected template array and select a specific template based
-    // on `seed[0]`
-    let selectedTemplate: string[] = templates[template]
-    let templateCompute: string = selectedTemplate[seed[0] % selectedTemplate.length]
-
-    return templateCompute.split('').map((c, i) => {
-      let chars: string = templateChars[c]
-
-      // Select the character using `seed[i + 1]`
-      return chars[seed[i + 1] % chars.length]
-    }).join('')
+    seed = toNetworkByte(generateSeed(site, key, counter, version, namespace))
   } else {
-    // Calculate the seed
-    let seed: Buffer = generateSeed(site, key, counter, version, namespace)
-
-    // Find the selected template array and select a specific template based
-    // on `seed[0]`
-    let selectedTemplate: string[] = templates[template]
-    let templateCompute: string = selectedTemplate[seed[0] % selectedTemplate.length]
-
-    return templateCompute.split('').map((c, i) => {
-      let chars: string = templateChars[c]
-
-      // Select the character using `seed[i + 1]`
-      return chars[seed[i + 1] % chars.length]
-    }).join('')
+    seed = generateSeed(site, key, counter, version, namespace)
   }
+
+  return computeTemplate(templates, templateChars, template, seed)
 }

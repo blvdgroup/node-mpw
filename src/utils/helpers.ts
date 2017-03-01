@@ -1,5 +1,4 @@
 import crypto = require('crypto')
-import { htons } from 'network-byte-order'
 import * as constants from './constants'
 
 export const generateSeed = (site: string, key: Buffer, counter: number = 1,
@@ -45,4 +44,19 @@ export const toNetworkByte = (buffer: Buffer | Uint16Array): Uint16Array => {
   }
 
   return uint
+}
+
+export const computeTemplate = (templates: Object, templateChars: Object, template: string,
+  seed: Buffer | Uint16Array) => {
+  // Find the selected template array and select a specific template based
+  // on `seed[0]`
+  let selectedTemplate: string[] = templates[template]
+  let templateCompute: string = selectedTemplate[seed[0] % selectedTemplate.length]
+
+  return templateCompute.split('').map((c, i) => {
+    let chars: string = templateChars[c]
+
+    // Select the character using `seed[i + 1]`
+    return chars[seed[i + 1] % chars.length]
+  }).join('')
 }
