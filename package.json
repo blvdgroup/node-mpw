@@ -5,8 +5,10 @@
   "main": "./dist/index.js",
   "typings": "./index.d.js",
   "scripts": {
-    "test": "tsc && mocha",
-    "tslint": "tslint --config tslint.json src/**/*.ts"
+    "build": "rimraf ./dist && tsc",
+    "prepublish": "npm run build",
+    "test": "npm run build && mocha",
+    "tslint": "tslint --config tslint.json src/**/*.ts index.d.ts"
   },
   "repository": {
     "type": "git",
@@ -27,7 +29,8 @@
     "@types/node": "^7.0.5",
     "chai": "^3.5.0",
     "mocha": "^3.2.0",
-    "tslint": "^4.4.2",
+    "rimraf": "^2.6.1",
+    "tslint": "^4.5.1",
     "tslint-microsoft-contrib": "^4.0.0",
     "typescript": "^2.2.1"
   },

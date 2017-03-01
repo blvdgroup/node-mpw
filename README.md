@@ -1,6 +1,6 @@
 # node-mpw
 
-> :key: Implementation of [Master Password](https://ssl.masterpasswordapp.com/algorithm.html) for nodejs and browser
+> Implementation of [Master Password](https://ssl.masterpasswordapp.com/algorithm.html) for nodejs and browser
 
 
 ## Installation
@@ -32,7 +32,7 @@ Returns: a key generated from the `scrypt` algorithm.
 
 ### generatePassword
 
-`generatePassword(site: string, key: Buffer, counter?: number, template?: string, version?: number, namespace?: string): string`
+`mpw.generatePassword(site: string, key: Buffer, counter?: number, template?: string, version?: number, namespace?: string): string`
 
 Encode a site password using the site's type template.
 
