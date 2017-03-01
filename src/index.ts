@@ -4,12 +4,12 @@ import * as constants from './utils/constants'
 import { generateSeed, toNetworkByte, computeTemplate } from './utils/helpers'
 import { templates, templateChars } from './utils/templates'
 
-export const generateKey = (name: string, password: string, version: number = constants.MP_ALGORITHM_VERSION,
-  namespace?: string): Buffer => {
-  if (typeof namespace === 'undefined') {
-    namespace = constants.NAMESPACE
-  }
-
+export const generateKey = (
+  name: string,
+  password: string,
+  version: number = constants.MP_ALGORITHM_VERSION,
+  namespace: string = constants.NAMESPACE
+): Buffer => {
   // Cache name length for older versions of MPW.
   // https://github.com/tmthrgd/mpw-js/blob/master/mpw.js#L36-L38
   let nameLength = name.length
@@ -31,15 +31,18 @@ export const generateKey = (name: string, password: string, version: number = co
   return hashSync(password, constants.SCRYPT_PARAMS, 64, buf)
 }
 
-export const generatePassword = (site: string, key: Buffer, counter: number = 1, template: string = 'long',
-  version: number = constants.MP_ALGORITHM_VERSION, namespace?: string): string => {
-  if (typeof namespace === 'undefined') {
-    namespace = constants.NAMESPACE
-  }
-
+export const generatePassword = (
+  site: string,
+  key: Buffer,
+  counter: number = 1,
+  template: string = 'long',
+  version: number = constants.MP_ALGORITHM_VERSION,
+  namespace: string = constants.NAMESPACE
+): string => {
+  // Keep a reference of the `seed` variable.
   let seed: Buffer | Uint16Array
 
-  // V0 backwards compatibility: convert  generated seed to network byte order.
+  // V0 backwards compatibility: convert generated seed to network byte order.
   if (version < 1) {
     seed = toNetworkByte(generateSeed(site, key, counter, version, namespace))
   } else {

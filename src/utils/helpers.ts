@@ -1,15 +1,13 @@
 import crypto = require('crypto')
 import * as constants from './constants'
 
-export const generateSeed = (site: string, key: Buffer, counter: number = 1,
-  version?: number, namespace?: string): Buffer => {
-  if (!namespace) {
-    namespace = constants.NAMESPACE
-  }
-  if (!version) {
-    version = constants.MP_ALGORITHM_VERSION
-  }
-
+export const generateSeed = (
+  site: string,
+  key: Buffer,
+  counter: number = 1,
+  version: number = constants.MP_ALGORITHM_VERSION,
+  namespace: string = constants.NAMESPACE
+): Buffer => {
   // Cache site length for older versions of MPW.
   // https://github.com/tmthrgd/mpw-js/blob/master/mpw.js#L36-L38
   let siteLength = site.length
@@ -46,8 +44,12 @@ export const toNetworkByte = (buffer: Buffer | Uint16Array): Uint16Array => {
   return uint
 }
 
-export const computeTemplate = (templates: Object, templateChars: Object, template: string,
-  seed: Buffer | Uint16Array) => {
+export const computeTemplate = (
+  templates: Object,
+  templateChars: Object,
+  template: string,
+  seed: Buffer | Uint16Array
+) => {
   // Find the selected template array and select a specific template based
   // on `seed[0]`
   let selectedTemplate: string[] = templates[template]

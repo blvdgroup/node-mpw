@@ -26,5 +26,12 @@ declare namespace mpw {
    * @param {string} [namespace] The namespace used as a salt to calculate the seed.
    * @returns {string} the final, generated password.
    */
-  export function generatePassword(site: string, key: Buffer, counter?: number, template?: string, version?: number, namespace?: string): string
+  export function generatePassword(
+    site: string,
+    key: Buffer,
+    counter?: number,
+    template?: string,
+    version?: number,
+    namespace?: string
+  ): string
 }
