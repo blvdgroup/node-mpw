@@ -1,4 +1,4 @@
-import scrypt = require('scrypt')
+import { hashSync } from 'scrypt'
 
 import * as constants from './utils/constants'
 import { generateSeed, toNetworkByte, computeTemplate } from './utils/helpers'
@@ -28,7 +28,7 @@ export const generateKey = (name: string, password: string, version: number = co
 
   buf.write(name, namespace.length + 4)
 
-  return scrypt.hashSync(password, constants.SCRYPT_PARAMS, 64, buf)
+  return hashSync(password, constants.SCRYPT_PARAMS, 64, buf)
 }
 
 export const generatePassword = (site: string, key: Buffer, counter: number = 1, template: string = 'long',
