@@ -1,10 +1,11 @@
 import scrypt = require('scrypt')
 
 import * as constants from './utils/constants'
-import { generateSeed } from './utils/helpers'
+import { generateSeed, toNetworkByte } from './utils/helpers'
 import { templates, templateChars } from './utils/templates'
 
-export const generateKey = (name: string, password: string, version?: number, namespace?: string): Buffer => {
+export const generateKey = (name: string, password: string, version: number = constants.MP_ALGORITHM_VERSION,
+  namespace?: string): Buffer => {
   if (!namespace) {
     namespace = constants.NAMESPACE
   }
@@ -33,24 +34,40 @@ export const generateKey = (name: string, password: string, version?: number, na
   return scrypt.hashSync(password, constants.SCRYPT_PARAMS, 64, buf)
 }
 
-export const generatePassword = (site: string, key: Buffer, counter: number = 1,
-  template: string = 'long', version?: number, namespace?: string): string => {
+export const generatePassword = (site: string, key: Buffer, counter: number = 1, template: string = 'long',
+  version: number = constants.MP_ALGORITHM_VERSION, namespace?: string): string => {
   if (!namespace) {
     namespace = constants.NAMESPACE
   }
 
-  // Calculate the seed
-  let seed = generateSeed(site, key, counter, version, namespace)
+  if (version < 1) {
+    let seed: Uint16Array = toNetworkByte(generateSeed(site, key, counter, version, namespace))
 
-  // Find the selected template array and select a specific template based
-  // on `seed[0]`
-  let selectedTemplate: string[] = templates[template]
-  let templateCompute: string = selectedTemplate[seed[0] % selectedTemplate.length]
+    // Find the selected template array and select a specific template based
+    // on `seed[0]`
+    let selectedTemplate: string[] = templates[template]
+    let templateCompute: string = selectedTemplate[seed[0] % selectedTemplate.length]
 
-  return templateCompute.split('').map((c, i) => {
-    let chars: string = templateChars[c]
+    return templateCompute.split('').map((c, i) => {
+      let chars: string = templateChars[c]
 
-    // Select the character using `seed[i + 1]`
-    return chars[seed[i + 1] % chars.length]
-  }).join('')
+      // Select the character using `seed[i + 1]`
+      return chars[seed[i + 1] % chars.length]
+    }).join('')
+  } else {
+    // Calculate the seed
+    let seed: Buffer = generateSeed(site, key, counter, version, namespace)
+
+    // Find the selected template array and select a specific template based
+    // on `seed[0]`
+    let selectedTemplate: string[] = templates[template]
+    let templateCompute: string = selectedTemplate[seed[0] % selectedTemplate.length]
+
+    return templateCompute.split('').map((c, i) => {
+      let chars: string = templateChars[c]
+
+      // Select the character using `seed[i + 1]`
+      return chars[seed[i + 1] % chars.length]
+    }).join('')
+  }
 }

@@ -1,4 +1,5 @@
 import crypto = require('crypto')
+import { htons } from 'network-byte-order'
 import * as constants from './constants'
 
 export const generateSeed = (site: string, key: Buffer, counter: number = 1,
@@ -31,4 +32,17 @@ export const generateSeed = (site: string, key: Buffer, counter: number = 1,
   buf.writeUInt32BE(counter, namespace.length + 4 + site.length)
 
   return crypto.createHmac('sha256', key).update(buf).digest()
+}
+
+export const toNetworkByte = (buffer: Buffer | Uint16Array): Uint16Array => {
+  let uint = new Uint16Array(buffer.length)
+
+  // Convert seed to network byte order.
+  // https://github.com/tmthrgd/mpw-js/blob/master/mpw.js#L208-L224
+  for (let i = 0; i < uint.length; i++) {
+    // tslint:disable-next-line
+    uint[i] = (buffer[i] > 127 ? 0x00ff : 0x0000) | (buffer[i] << 8)
+  }
+
+  return uint
 }
