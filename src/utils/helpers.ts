@@ -10,7 +10,7 @@ import * as constants from './constants'
  * @param {number} [counter] An integer that can be incremented when the user needs a new password for the site.
  * @param {number} [version] The algorithm version being used for this process.
  * @param {string} [namespace] The namespace used as a salt to calculate the seed.
- * @returns {Buffer} The template seed.
+ * @returns {Buffer} the template seed.
  */
 export const generateSeed = (
   site: string,
@@ -47,7 +47,7 @@ export const generateSeed = (
  *
  * @export
  * @param {Buffer} buffer The buffer to be converted into network byte order.
- * @returns {Uint16Array} A Uint16Array of the buffer in network byte order.
+ * @returns {Uint16Array} a `Uint16Array` of the buffer in network byte order.
  */
 export const toNetworkByte = (buffer: Buffer): Uint16Array => {
   let uint = new Uint16Array(buffer.length)
@@ -70,7 +70,7 @@ export const toNetworkByte = (buffer: Buffer): Uint16Array => {
  * @param {Object} templateChars An Object containing a list of password characters.
  * @param {string} template The desired template.
  * @param {(Buffer | Uint16Array)} seed The template seed generated from the `generateSeed()` function.
- * @returns {string} The final password string computed from the template.
+ * @returns {string} the final password string computed from the template.
  */
 export const computeTemplate = (
   templates: Object,

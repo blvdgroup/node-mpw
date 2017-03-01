@@ -9,10 +9,10 @@ import { templates, templateChars } from './utils/templates'
  *
  * @export
  * @param {string} name The desired username.
- * @param {string} password The desired password.
+ * @param {string} password The desired master password.
  * @param {string} [version] The algorithm version being used for this process.
  * @param {string} [namespace] The namespace used as a salt to calculate the key.
- * @returns {Buffer} An key generated from the `scrypt` algorithm.
+ * @returns {Buffer} a key generated from the `scrypt` algorithm.
  */
 export const generateKey = (
   name: string,
