@@ -15,7 +15,9 @@ $ npm install --save node-mpw
 import mpw from 'node-mpw'
 ```
 
-### `mpw.generateKey(name: string, password: string, version?: string, namespace?: string): Buffer`
+### generateKey
+
+`mpw.generateKey(name: string, password: string, version?: string, namespace?: string): Buffer`
 
 Calculate the master key from a user's name and master password.
 
@@ -28,7 +30,9 @@ Calculate the master key from a user's name and master password.
 
 Returns: a key generated from the `scrypt` algorithm.
 
-### `generatePassword(site: string, key: Buffer, counter?: number, template?: string, version?: number, namespace?: string): string`
+### generatePassword
+
+`generatePassword(site: string, key: Buffer, counter?: number, template?: string, version?: number, namespace?: string): string`
 
 Encode a site password using the site's type template.
 
