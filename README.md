@@ -5,15 +5,34 @@
 
 ## Installation
 
+Requirements:
+
+- Node.js (v4.0.0+)
+
+**Note:** this package uses `scrypt` which is built with `node-gyp` so you might need to compile C code. Blame `node-gyp`.
+
+First, install Node.js, and then open a terminal and run `node -v` and `npm -v` to make sure Node is installed correctly.
+
+Now we can install the package.
+
 ```bash
 $ npm install --save node-mpw
 ```
 
-## Usage
+Once it's installed and in your `node_modules` folder, you can now run the script! Here's an example:
 
 ```js
 import mpw from 'node-mpw'
+
+const username = 'username'
+const password = 'password'
+const site = 'example.com'
+
+const key = mpw.generateKey(username, password)
+const generated = mpw.generatePassword(site, key, 1, 'long', 3)
 ```
+
+## API Reference
 
 ### generateKey
 
@@ -47,15 +66,9 @@ Encode a site password using the site's type template.
 
 Returns: the final, generated password.
 
-## To-Do List
-
-- ~~Clean up code and write documentation~~ **Done!**
-- ~~Refine algorithm & public API to make it compatible with [Master Password app](https://ssl.masterpasswordapp.com/).~~ **Done!**
-- Publish as npm package
-
 ## Contributing
 
-Issues and Pull Requests are welcome! Please read our contributing guidelines & code of conduct beforehand.
+Issues and Pull Requests are welcome! Please read our [Contributing Guidelines](https://github.com/blvdgroup/guidelines) & [Code of Conduct](CONDUCT.md) beforehand.
 
 ### Reading the commit log
 
