@@ -1,4 +1,25 @@
-export const templates = {
+interface PasswordTemplate {
+  maximum: string[],
+  long: string[],
+  medium: string[],
+  basic: string[],
+  short: string[],
+  pin: string[]
+}
+
+interface PasswordCharacterTemplate {
+  V: string,
+  C: string,
+  v: string,
+  c: string,
+  A: string,
+  a: string,
+  n: string,
+  o: string,
+  x: string
+}
+
+export const templates: PasswordTemplate = {
   maximum: [
     'anoxxxxxxxxxxxxxxxxx',
     'axxxxxxxxxxxxxxxxxno'
@@ -43,7 +64,7 @@ export const templates = {
   ]
 }
 
-export const templateChars = {
+export const templateChars: PasswordCharacterTemplate = {
   V: 'AEIOU',
   C: 'BCDFGHJKLMNPQRSTVWXYZ',
   v: 'aeiou',
