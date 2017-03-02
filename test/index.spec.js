@@ -115,7 +115,11 @@ describe('mpw', () => {
       }
     ]
 
-    it('should return a string')
+    it('should return a string', () => {
+      const key = mpw.generateKey(username, password)
+      const generated = mpw.generatePassword(site, key)
+      assert.typeOf(generated, 'string', 'generated password is a string')
+    })
 
     tests.forEach((test) => {
       it(`generates the correct \`${test.args.template}\` template password (V${test.args.version})`, () => {
