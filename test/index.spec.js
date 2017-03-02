@@ -5,108 +5,124 @@ const mpw = require('../dist')
 
 const assert = chai.assert
 
-// Testing parameters
-const testUsername = 'username'
-const testPassword = 'password'
-const testSite = 'example.com'
-
 describe('mpw', () => {
+  // Testing parameters
+  const username = 'username'
+  const password = 'password'
+  const site = 'example.com'
+
+  describe('#generateKey()', () => {
+    it('should return a Buffer')
+  })
+
   describe('#generatePassword()', () => {
-    it('generates the correct `maximum` template password (V3)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 3)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'maximum', 3), 'v8]RfHIhBg1XE1!692*O')
-    })
-    it('generates the correct `long` template password (V3)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 3)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'long', 3), 'Fogu4!ZindLoni')
-    })
-    it('generates the correct `medium` template password (V3)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 3)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'medium', 3), 'Fog9-Qeb')
-    })
-    it('generates the correct `basic` template password (V3)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 3)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'basic', 3), 'vVv9fOp2')
-    })
-    it('generates the correct `short` template password (V3)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 3)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'short', 3), 'Fog9')
-    })
-    it('generates the correct `pin` template password (V3)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 3)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'pin', 3), '5819')
-    })
-    it('generates the correct `maximum` template password (V2)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 2)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'maximum', 2), 'v8]RfHIhBg1XE1!692*O')
-    })
-    it('generates the correct `long` template password (V2)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 2)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'long', 2), 'Fogu4!ZindLoni')
-    })
-    it('generates the correct `medium` template password (V2)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 2)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'medium', 2), 'Fog9-Qeb')
-    })
-    it('generates the correct `basic` template password (V2)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 2)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'basic', 2), 'vVv9fOp2')
-    })
-    it('generates the correct `short` template password (V2)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 2)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'short', 2), 'Fog9')
-    })
-    it('generates the correct `pin` template password (V2)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 2)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'pin', 2), '5819')
-    })
-    it('generates the correct `maximum` template password (V1)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 1)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'maximum', 1), 'v8]RfHIhBg1XE1!692*O')
-    })
-    it('generates the correct `long` template password (V1)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 1)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'long', 1), 'Fogu4!ZindLoni')
-    })
-    it('generates the correct `medium` template password (V1)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 1)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'medium', 1), 'Fog9-Qeb')
-    })
-    it('generates the correct `basic` template password (V1)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 1)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'basic', 1), 'vVv9fOp2')
-    })
-    it('generates the correct `short` template password (V1)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 1)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'short', 1), 'Fog9')
-    })
-    it('generates the correct `pin` template password (V1)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 1)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'pin', 1), '5819')
-    })
-    it('generates the correct `maximum` template password (V0)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 0)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'maximum', 0), 'HSbR#@vlmc)mm))3#A3!')
-    })
-    it('generates the correct `long` template password (V0)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 0)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'long', 0), 'Toyu4!ZiylSoyi')
-    })
-    it('generates the correct `medium` template password (V0)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 0)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'medium', 0), 'ToySum1!')
-    })
-    it('generates the correct `basic` template password (V0)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 0)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'basic', 0), 'HAH9Ngg7')
-    })
-    it('generates the correct `short` template password (V0)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 0)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'short', 0), 'Toy9')
-    })
-    it('generates the correct `pin` template password (V0)', () => {
-      const testKey = mpw.generateKey(testUsername, testPassword, 3)
-      assert.equal(mpw.generatePassword(testSite, testKey, 1, 'pin', 0), '5819')
+    const tests = [
+      {
+        args: { counter: 1, template: 'maximum', version: 3 },
+        expected: 'v8]RfHIhBg1XE1!692*O'
+      },
+      {
+        args: { counter: 1, template: 'long', version: 3 },
+        expected: 'Fogu4!ZindLoni'
+      },
+      {
+        args: { counter: 1, template: 'medium', version: 3 },
+        expected: 'Fog9-Qeb'
+      },
+      {
+        args: { counter: 1, template: 'basic', version: 3 },
+        expected: 'vVv9fOp2'
+      },
+      {
+        args: { counter: 1, template: 'short', version: 3 },
+        expected: 'Fog9'
+      },
+      {
+        args: { counter: 1, template: 'pin', version: 3 },
+        expected: '5819'
+      },
+      {
+        args: { counter: 1, template: 'maximum', version: 2 },
+        expected: 'v8]RfHIhBg1XE1!692*O'
+      },
+      {
+        args: { counter: 1, template: 'long', version: 2 },
+        expected: 'Fogu4!ZindLoni'
+      },
+      {
+        args: { counter: 1, template: 'medium', version: 2 },
+        expected: 'Fog9-Qeb'
+      },
+      {
+        args: { counter: 1, template: 'basic', version: 2 },
+        expected: 'vVv9fOp2'
+      },
+      {
+        args: { counter: 1, template: 'short', version: 2 },
+        expected: 'Fog9'
+      },
+      {
+        args: { counter: 1, template: 'pin', version: 2 },
+        expected: '5819'
+      },
+      {
+        args: { counter: 1, template: 'maximum', version: 1 },
+        expected: 'v8]RfHIhBg1XE1!692*O'
+      },
+      {
+        args: { counter: 1, template: 'long', version: 1 },
+        expected: 'Fogu4!ZindLoni'
+      },
+      {
+        args: { counter: 1, template: 'medium', version: 1 },
+        expected: 'Fog9-Qeb'
+      },
+      {
+        args: { counter: 1, template: 'basic', version: 1 },
+        expected: 'vVv9fOp2'
+      },
+      {
+        args: { counter: 1, template: 'short', version: 1 },
+        expected: 'Fog9'
+      },
+      {
+        args: { counter: 1, template: 'pin', version: 1 },
+        expected: '5819'
+      },
+      {
+        args: { counter: 1, template: 'maximum', version: 0 },
+        expected: 'HSbR#@vlmc)mm))3#A3!'
+      },
+      {
+        args: { counter: 1, template: 'long', version: 0 },
+        expected: 'Toyu4!ZiylSoyi'
+      },
+      {
+        args: { counter: 1, template: 'medium', version: 0 },
+        expected: 'ToySum1!'
+      },
+      {
+        args: { counter: 1, template: 'basic', version: 0 },
+        expected: 'HAH9Ngg7'
+      },
+      {
+        args: { counter: 1, template: 'short', version: 0 },
+        expected: 'Toy9'
+      },
+      {
+        args: { counter: 1, template: 'pin', version: 0 },
+        expected: '5819'
+      }
+    ]
+
+    it('should return a string')
+
+    tests.forEach((test) => {
+      it(`generates the correct \`${test.args.template}\` template password (V${test.args.version})`, () => {
+        const key = mpw.generateKey(username, password, test.args.version)
+        const generated = mpw.generatePassword(site, key, test.args.counter, test.args.template, test.args.version)
+        assert.equal(generated, test.expected)
+      })
     })
   })
 })

@@ -2,6 +2,7 @@
   "extends": "airbnb-base",
   "rules": {
     "comma-dangle": ["error", "never"],
+    "max-len": ["error", 140],
     "semi": ["error", "never"],
     "no-unexpected-multiline": "error"
   }
