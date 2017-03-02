@@ -12,7 +12,10 @@ describe('mpw', () => {
   const site = 'example.com'
 
   describe('#generateKey()', () => {
-    it('should return a Buffer')
+    it('should return a Buffer', () => {
+      const key = mpw.generateKey(username, password)
+      assert.ok(key instanceof Buffer, 'generated key is a Buffer')
+    })
   })
 
   describe('#generatePassword()', () => {
