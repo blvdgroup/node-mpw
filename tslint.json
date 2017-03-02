@@ -24,7 +24,7 @@
       "spaces"
     ],
     "linebreak-style": [true, "LF"],
-    "interface-name": [false],
+    "interface-name": [true, "never-prefix"],
     "jsdoc-format": true,
     "label-position": true,
     "max-line-length": [
@@ -89,9 +89,10 @@
       "allow-null-check"
     ],
     "typedef": [
-      false,
+      true,
       "call-signature",
       "parameter",
+      "arrow-parameter",
       "property-declaration",
       "member-variable-declaration"
     ],
