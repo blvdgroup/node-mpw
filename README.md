@@ -24,7 +24,7 @@ $ npm install --save node-mpw
 Once it's installed and in your `node_modules` folder, you can now run the script! Here's an example:
 
 ```js
-import mpw from 'node-mpw'
+import * as mpw from 'node-mpw'
 
 const username = 'username'
 const password = 'password'
