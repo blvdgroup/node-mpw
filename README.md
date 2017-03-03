@@ -1,5 +1,7 @@
 # node-mpw
 
+[![Build Status](https://travis-ci.org/blvdgroup/node-mpw.svg?branch=master)](https://travis-ci.org/blvdgroup/node-mpw)
+
 > Implementation of [Master Password](https://ssl.masterpasswordapp.com/algorithm.html) for nodejs and browser
 
 
