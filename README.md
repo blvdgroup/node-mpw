@@ -74,12 +74,28 @@ Issues and Pull Requests are welcome! Please read our [Contributing Guidelines](
 
 ### Reading the commit log
 
-We use a few emojis as an identifier on what the commits are. The following commit naming scheme is loosely based on the [Commitizen](https://commitizen.github.io/cz-cli/) commit naming conventions. Feel free to use this standard as well.
+Our commit logs are [Commitizen-friendly](https://commitizen.github.io/cz-cli/). With Commitizen, the header of every commit message has to include a `type`, an optional `scope` and a `subject` with the following format:
 
-- :bulb: (bulb): Working on new features
-- :bug: (bug): Bug squashing
-- :memo: (memo): Working on documentation
-- :dash: (dash): Code style cleanup / linting / dusting / etc.
-- :construction: (construction): Large refactors or rewrites
-- :wrench: (wrench): Adding missing tests
-- :arrow_up: (arrow_up): Version bumps
+```
+<type>(<scope>): <subject>
+```
+
+You can use one of the following methods to use Commitizen.
+
+**Option 1:** Install Commitizen by running `npm install -g commitizen`, and run `git cz` instead of `git commit` when you want to commit. Follow the instructions on the next screen.
+
+**Option 2:** When you run `npm install` the core `commitizen` library is also saved as `devDependencies`. You can simply run `npm run commit` instead of `git commit` to enable Commitizen. Follow the instructions on the next screen.
+
+**Option 3:** Manually typing the commits altogether. We use the following Commitizen tags.
+
+- feat: A new feature
+- fix: A bug fix
+- docs: Documentation only changes
+- style: Changes that do not affect the meaning on the code (white-space, formatting, missing semi-colons, etc)
+- refactor: A code change that neither fixes a bug or adds a feature
+- perf: A code change that improves performance
+- test: Adding missing tests
+- build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- ci: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
+- chore: Changes to the build process or auxiliary tools and libraries such as documentation generation
+- revert: Reverts a previous commit

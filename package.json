@@ -6,6 +6,7 @@
   "typings": "./index.d.js",
   "scripts": {
     "build": "rimraf ./dist && tsc",
+    "commit": "git-cz",
     "prepublish": "npm run build",
     "test": "npm run build && mocha",
     "tslint": "tslint --config tslint.json src/**/*.ts index.d.ts"
@@ -28,6 +29,8 @@
   "devDependencies": {
     "@types/node": "^7.0.5",
     "chai": "^3.5.0",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.0.0",
     "eslint": "^3.16.1",
     "eslint-config-airbnb-base": "^11.1.0",
     "eslint-plugin-import": "^2.2.0",
@@ -40,5 +43,10 @@
   },
   "dependencies": {
     "scrypt": "^6.0.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   }
 }
