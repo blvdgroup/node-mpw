@@ -7,18 +7,18 @@ import * as constants from './constants'
  * @export
  * @param {string} site The site name. The bare domain name is an ideal choice.
  * @param {Buffer} key An `scrypt`-hashed key generated from the `generateKey()` function.
- * @param {number} [counter] An integer that can be incremented when the user needs a new password for the site.
- * @param {number} [version] The algorithm version being used for this process.
- * @param {string} [namespace] The namespace used as a salt to calculate the seed.
+ * @param {number} [counter=1] An integer that can be incremented when the user needs a new password for the site.
+ * @param {number} [version=constants.MP_ALGORITHM_VERSION] The algorithm version being used for this process.
+ * @param {string} [namespace=constants.NAMESPACE] The namespace used as a salt to calculate the seed.
  * @returns {Buffer} the template seed.
  */
-export const generateSeed = (
+export function generateSeed (
   site: string,
   key: Buffer,
   counter: number = 1,
   version: number = constants.MP_ALGORITHM_VERSION,
   namespace: string = constants.NAMESPACE
-): Buffer => {
+): Buffer {
   // Cache site length for older versions of MPW.
   // https://github.com/tmthrgd/mpw-js/blob/master/mpw.js#L36-L38
   let siteLength = site.length
@@ -49,7 +49,7 @@ export const generateSeed = (
  * @param {Buffer} buffer The buffer to be converted into network byte order.
  * @returns {Uint16Array} a `Uint16Array` of the buffer in network byte order.
  */
-export const toNetworkByte = (buffer: Buffer): Uint16Array => {
+export function toNetworkByte (buffer: Buffer): Uint16Array {
   let uint = new Uint16Array(buffer.length)
 
   // Convert seed to network byte order.
@@ -66,24 +66,24 @@ export const toNetworkByte = (buffer: Buffer): Uint16Array => {
  * Determines the template to use based on the template seed, and computes the final password.
  *
  * @export
- * @param {Object} templates An Object containing a list of the available templates.
- * @param {Object} templateChars An Object containing a list of password characters.
+ * @param {{ [key: string]: any }} templates An Object containing a list of the available templates.
+ * @param {{ [key: string]: any }} templateChars An Object containing a list of password characters.
  * @param {string} template The desired template.
  * @param {(Buffer | Uint16Array)} seed The template seed generated from the `generateSeed()` function.
  * @returns {string} the final password string computed from the template.
  */
-export const computeTemplate = (
-  templates: Object,
-  templateChars: Object,
+export function computeTemplate (
+  templates: { [key: string]: any },
+  templateChars: { [key: string]: any },
   template: string,
   seed: Buffer | Uint16Array
-): string => {
+): string {
   // Find the selected template array and select a specific template based
   // on `seed[0]`
   let selectedTemplate: string[] = templates[template]
   let templateCompute: string = selectedTemplate[seed[0] % selectedTemplate.length]
 
-  return templateCompute.split('').map((c, i) => {
+  return templateCompute.split('').map((c: string, i: number) => {
     let chars: string = templateChars[c]
 
     // Select the character using `seed[i + 1]`

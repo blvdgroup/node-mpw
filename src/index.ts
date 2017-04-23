@@ -14,12 +14,12 @@ import { templates, templateChars } from './utils/templates'
  * @param {string} [namespace] The namespace used as a salt to calculate the key.
  * @returns {Buffer} a key generated from the `scrypt` algorithm.
  */
-export const generateKey = (
+export function generateKey (
   name: string,
   password: string,
   version: number = constants.MP_ALGORITHM_VERSION,
   namespace: string = constants.NAMESPACE
-): Buffer => {
+): Buffer {
   // Cache name length for older versions of MPW.
   // https://github.com/tmthrgd/mpw-js/blob/master/mpw.js#L36-L38
   let nameLength = name.length
@@ -53,14 +53,14 @@ export const generateKey = (
  * @param {string} [namespace] The namespace used as a salt to calculate the seed.
  * @returns {string} the final, generated password.
  */
-export const generatePassword = (
+export function generatePassword (
   site: string,
   key: Buffer,
   counter: number = 1,
   template: string = 'long',
   version: number = constants.MP_ALGORITHM_VERSION,
   namespace: string = constants.NAMESPACE
-): string => {
+): string {
   // Keep a reference of the `seed` variable.
   let seed: Buffer | Uint16Array
 
