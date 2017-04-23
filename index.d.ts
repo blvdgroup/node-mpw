@@ -2,8 +2,6 @@
 // Project: https://github.com/blvdgroup/node-mpw
 // Definitions by: Resi Respati <https://resir014.github.io/>
 
-export as namespace mpw
-
 /**
  * Calculate the master key from a user's name and master password.
  *
