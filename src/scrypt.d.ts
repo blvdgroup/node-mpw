@@ -11,9 +11,9 @@ declare module 'scrypt' {
    * @extends {Object}
    */
   export interface ParamsObject extends Object {
-    N: number;
-    r: number;
-    p: number;
+    N: number
+    r: number
+    p: number
   }
 
   /**
