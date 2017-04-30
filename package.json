@@ -1,6 +1,6 @@
 {
   "name": "node-mpw",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Implementation of Master Password for nodejs and browser",
   "main": "./dist/index.js",
   "typings": "./index.d.js",
